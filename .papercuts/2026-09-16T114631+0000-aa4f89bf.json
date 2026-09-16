@@ -1,0 +1,14 @@
+{
+  "id": "aa4f89bf",
+  "ts": "2026-09-16T11:46:31+00:00",
+  "text": "pnpm add -D failed after installing packages because the environment blocked the esbuild build script",
+  "tags": [
+    "pnpm",
+    "tools"
+  ],
+  "who": "agent",
+  "model": "gpt-5.6-sol",
+  "session": "",
+  "where": "/Users/olavassbotn/Developer/mastersal",
+  "branch": "main"
+}
