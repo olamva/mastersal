@@ -15,6 +15,11 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 - The Vinstraff API exposes group discovery through `/groups/search` and `/groups/me`.
 - Vercel Hobby permits only one cron invocation each day as of 2026-01-28.
 - Five-minute freshness therefore needs request-triggered synchronization on the free plan.
+- The production package manager uses pnpm 11.27.0 because Vercel rejects pnpm 11.12.0.
+- The public GitHub repository is `https://github.com/olamva/mastersal`.
+- The stable production URL is `https://mastersal.vercel.app`.
+- Vercel connected the free Neon resource `neon-crimson-cable` to the project.
+- The initial production deployment succeeded on 2026-09-17.
 
 ## Open decisions
 
@@ -23,3 +28,5 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 ## Dead ends
 
 <!-- what was tried and did not work, and why. stops rediscovery. -->
+
+- Vercel CLI Git connection fails for `olamva/mastersal` despite local GitHub access.

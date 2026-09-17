@@ -1,0 +1,14 @@
+{
+  "id": "f2c977ae",
+  "ts": "2026-09-17T09:52:52+00:00",
+  "text": "zsh reserves the variable name status and rejected a deployment verification script",
+  "tags": [
+    "shell",
+    "zsh"
+  ],
+  "who": "agent",
+  "model": "gpt-5.6-sol",
+  "session": "",
+  "where": "/Users/olavassbotn/Developer/mastersal",
+  "branch": "main"
+}
