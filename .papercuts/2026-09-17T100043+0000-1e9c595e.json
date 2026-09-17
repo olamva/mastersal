@@ -1,0 +1,15 @@
+{
+  "id": "1e9c595e",
+  "ts": "2026-09-17T10:00:43+00:00",
+  "text": "Online advertises /oidc/register in discovery but returns a generic 400 for valid confidential-client registrations",
+  "tags": [
+    "auth0",
+    "docs",
+    "oauth"
+  ],
+  "who": "agent",
+  "model": "gpt-5.6-sol",
+  "session": "",
+  "where": "https://auth.online.ntnu.no/oidc/register",
+  "branch": "main"
+}

@@ -20,6 +20,9 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 - The stable production URL is `https://mastersal.vercel.app`.
 - Vercel connected the free Neon resource `neon-crimson-cable` to the project.
 - The initial production deployment succeeded on 2026-09-17.
+- Online rejects confidential dynamic client registration with HTTP 400.
+- Online manages production OAuth clients through Terraform in `dotkom/monoweb`.
+- The OAuth provisioning request is `https://github.com/dotkom/monoweb/issues/3719`.
 
 ## Open decisions
 
@@ -30,3 +33,4 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 <!-- what was tried and did not work, and why. stops rediscovery. -->
 
 - Vercel CLI Git connection fails for `olamva/mastersal` despite local GitHub access.
+- Online client creation now waits for the Online maintainers.
