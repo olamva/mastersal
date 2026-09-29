@@ -43,6 +43,7 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 - `/groups/me` returns groups with empty `members`; only `/groups/{id}` includes members and punishments.
 - A visit starts a background synchronization only after five minutes; that visit still gets the old snapshot.
 - Doppler names the client values `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET`; the app reads `ONLINE_*`.
+- Since 2026-09-29, each visit synchronizes before the response; a failed synchronization returns the stored snapshot.
 - `mastersal-scaffold` is the unchanged `create-next-app` output from 2026-09-16.
 
 ## Open decisions
