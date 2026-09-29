@@ -78,7 +78,7 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
       >
         <header className="enter text-center">
           <p className="font-wide text-xs tracking-[0.4em] sm:text-sm">
-            HUS DE {group.toUpperCase()} PRESENTERER
+            MASTERSAL {group.toUpperCase()} PRESENTERER
           </p>
           <h1 className="barbie-logo -rotate-3 text-[clamp(3.5rem,13vw,8rem)] leading-tight">
             Drømmehuset
