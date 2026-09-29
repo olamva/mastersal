@@ -37,6 +37,8 @@ Set the same variables for Production in Vercel. Generate `TOKEN_ENCRYPTION_KEY`
 
 Apply `migrations/001_initial.sql` to the Neon database once.
 
+Register the Online client by hand. Online advertises `/oidc/register`, but it rejects valid confidential-client registrations with HTTP 400.
+
 Register this callback URL for the Online client:
 
 ```text
