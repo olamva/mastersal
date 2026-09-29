@@ -9,6 +9,6 @@
   "who": "agent",
   "model": "gpt-5.6-sol",
   "session": "",
-  "where": "/Users/olavassbotn/Developer/mastersal",
+  "where": ".",
   "branch": "main"
 }

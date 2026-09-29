@@ -13,13 +13,25 @@ This site shows the unpaid Vinstraff totals for the `mastersal` group.
 ## Commands
 
 - Run `pnpm dev` to start development. Vite sends `/api` requests to production.
+- Set `VITE_PORT` to use a port other than `5173`. Set `DEV_WATCH=0` to use file polling.
 - Run `pnpm build` to check the types and build the app.
-- Run `pnpm test` to run the tests.
+- Run `pnpm typecheck` to check the types.
+- Run `pnpm format` to format the files.
+- Run `pnpm test` to check the formatting and run the tests.
 - Run `vercel dev` to run the app and the functions together.
 
 ## Configuration
 
 Copy `.env.example` to `.env.local` and replace each placeholder.
+`pnpm dev` does not need `.env.local`.
+
+Git does not copy `.env.local` to a new worktree. Create the file in each worktree that needs it:
+
+```sh
+cp .env.example .env.local
+```
+
+Then replace each placeholder in the new file.
 
 Set the same variables for Production in Vercel. Generate `TOKEN_ENCRYPTION_KEY` as 32 random bytes in Base64 format.
 

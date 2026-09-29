@@ -3,9 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/dev-ports.ts && vite",
     "build": "tsc && vite build",
-    "test": "vitest run"
+    "test": "prettier --check . && vitest run server && node --test 'test/**/*.test.ts'",
+    "typecheck": "tsc",
+    "format": "prettier --write .",
+    "worktree:cleanup": "node scripts/worktree-cleanup.ts"
   },
   "packageManager": "pnpm@11.27.0",
   "dependencies": {
@@ -19,6 +22,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "prettier": "^3.9.9",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.1",
