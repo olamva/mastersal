@@ -63,26 +63,60 @@ export default function App() {
             <ul className="mt-4 space-y-3 font-meny">
               {snapshot.members.map((member) => (
                 <li key={member.id}>
-                  <div className="flex items-end gap-1">
-                    <span className="font-bold uppercase">
-                      {member.displayName}
-                    </span>
-                    <span className="mb-1 flex-1 border-b-2 border-dotted border-navy" />
-                    {String(member.unpaidValue)
-                      .split("")
-                      .map((digit, index) => (
-                        <span
-                          key={index}
-                          className="inline-block w-5 bg-white text-center font-bold text-saus"
-                        >
-                          {digit}
+                  <details className="group">
+                    <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                      <div className="flex items-end gap-1">
+                        <span className="font-bold uppercase">
+                          {member.displayName}
                         </span>
+                        <span className="mb-1 flex-1 border-b-2 border-dotted border-navy" />
+                        {String(member.unpaidValue)
+                          .split("")
+                          .map((digit, index) => (
+                            <span
+                              key={index}
+                              className="inline-block w-5 bg-white text-center font-bold text-saus"
+                            >
+                              {digit}
+                            </span>
+                          ))}
+                        <span className="font-bold">,-</span>
+                      </div>
+                      <p className="text-xs">
+                        <span className="inline-block group-open:rotate-90">
+                          ▸
+                        </span>{" "}
+                        {member.punishmentCount} straffer, løk, saus
+                      </p>
+                    </summary>
+                    <ul className="mt-1 ml-4 space-y-1 text-sm">
+                      {member.punishments?.map((punishment) => (
+                        <li
+                          key={punishment.id}
+                          className={`flex gap-2 ${punishment.paid ? "line-through opacity-50" : ""}`}
+                        >
+                          <span className="whitespace-nowrap">
+                            {new Date(punishment.createdAt).toLocaleDateString(
+                              "nb-NO",
+                            )}
+                          </span>
+                          <span className="flex-1">
+                            {punishment.emoji.repeat(punishment.amount)}{" "}
+                            {punishment.name}
+                            {punishment.reason && (
+                              <span className="italic">
+                                {" "}
+                                – {punishment.reason}
+                              </span>
+                            )}
+                          </span>
+                          <span className="font-bold whitespace-nowrap">
+                            {punishment.value},-
+                          </span>
+                        </li>
                       ))}
-                    <span className="font-bold">,-</span>
-                  </div>
-                  <p className="text-xs">
-                    {member.punishmentCount} straffer, løk, saus
-                  </p>
+                    </ul>
+                  </details>
                 </li>
               ))}
             </ul>
