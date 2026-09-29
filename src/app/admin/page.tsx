@@ -6,15 +6,15 @@ import Link from "next/link";
 
 const dateTime = new Intl.DateTimeFormat("nb-NO", { dateStyle: "medium", timeStyle: "short" });
 
-export default async function AdminPage() {
-  const cookieStore = await cookies();
+export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
+  const [cookieStore, { error }] = await Promise.all([cookies(), searchParams]);
   const configured = Boolean(process.env.ADMIN_SETUP_SECRET && process.env.DATABASE_URL);
   const authenticated = configured && validateAdminSession(cookieStore.get("mastersal_admin")?.value, appEnv().adminSecret);
   if (!authenticated) return (
     <main className="admin-shell">
       <div className="admin-panel">
         <div><p className="eyebrow">Administrasjon</p><h1>mastersal</h1></div>
-        <form method="post" action="/api/admin/login"><label htmlFor="secret">Administrasjonsnøkkel</label><input id="secret" name="secret" type="password" required autoComplete="current-password" /><button type="submit">Åpne administrasjon</button></form>
+        <form method="post" action="/api/admin/login"><label htmlFor="secret">Administrasjonsnøkkel</label><input id="secret" name="secret" type="password" required autoComplete="current-password" /><button type="submit">Åpne administrasjon</button>{error === "unauthorized" && <p role="alert">Feil administrasjonsnøkkel.</p>}</form>
       </div>
     </main>
   );
