@@ -1,0 +1,13 @@
+{
+  "id": "8466a6ad",
+  "ts": "2026-09-29T20:31:34+00:00",
+  "text": "preview_snapshot fails with 'Preview automation snapshot failed' on hidden tab after location.reload(); new tab also fails",
+  "tags": [
+    "tools"
+  ],
+  "who": "agent",
+  "model": "opus-5.5",
+  "session": "bf4c26e3",
+  "where": "mcp__t3-code__preview_snapshot",
+  "branch": "t3code/smooth-nina-mode-animations"
+}

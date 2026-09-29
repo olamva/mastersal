@@ -39,7 +39,7 @@ const drips =
   "M0 0H100V5C96 5 95 12 93 12S90 5 86 5 82 16 79 16 76 5 70 5 64 9 61 9 58 5 52 5 47 18 44 18 41 5 35 5 30 11 27 11 24 5 18 5 13 14 10 14 7 5 0 5Z";
 
 export const Sparkles = () => (
-  <div className="fx pointer-events-none fixed inset-0 overflow-hidden drop-shadow-[0_0_3px_#ff4fa8]">
+  <div className="fx pointer-events-none fixed inset-0 overflow-hidden">
     {twinkles.map((style, index) => (
       <span key={index} className="sparkle twinkle" style={style} />
     ))}
@@ -48,8 +48,10 @@ export const Sparkles = () => (
 
 export const NinaIntro = () => (
   <div className="fx nina-intro pointer-events-none fixed inset-0 z-50 grid place-items-center overflow-hidden">
-    <div className="sunburst absolute -inset-1/2" />
-    <div className="absolute inset-0 drop-shadow-[0_0_6px_#fff]">
+    <div className="iris absolute size-[150vmax] overflow-hidden rounded-full bg-[#ff7ac1]">
+      <div className="sunburst absolute inset-0" />
+    </div>
+    <div className="absolute inset-0">
       {burst.map((style, index) => (
         <span key={index} className="sparkle burst" style={style} />
       ))}
@@ -72,7 +74,7 @@ export const GonkeRot = () => (
       </filter>
     </svg>
     <div className="decay absolute inset-0">
-      <div className="absolute inset-0 mix-blend-multiply [filter:url(#rot-fuzz)]">
+      <div className="absolute inset-0 mix-blend-multiply">
         {mold.map((style, index) => (
           <span key={index} className="mold" style={style} />
         ))}
