@@ -38,6 +38,10 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 - Vercel Production received `ONLINE_CLIENT_ID` and `ONLINE_CLIENT_SECRET` from Doppler `prd` on 2026-09-29.
 - `ADMIN_SETUP_SECRET` was rotated on 2026-09-29; Doppler `prd` holds the current value.
 - The production deployment of 2026-09-29 reports database `ok` and OAuth `authorization_required`.
+- Vinstraff accepts access tokens from the `prd` client; the first successful synchronization ran on 2026-09-29.
+- The Vinstraff group with short name `MASTERSAL` has ID `487db212-6c4f-4f7b-a616-563d5ee419cb`.
+- `/groups/me` returns groups with empty `members`; only `/groups/{id}` includes members and punishments.
+- A visit starts a background synchronization only after five minutes; that visit still gets the old snapshot.
 - Doppler names the client values `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET`; the app reads `ONLINE_*`.
 - `mastersal-scaffold` is the unchanged `create-next-app` output from 2026-09-16.
 
