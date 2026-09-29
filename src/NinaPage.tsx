@@ -19,45 +19,82 @@ const Bibble = () => (
         <filter id="bibble-fluff" x="-20%" y="-20%" width="140%" height="140%">
           <feTurbulence
             type="fractalNoise"
-            baseFrequency="0.6"
+            baseFrequency="0.8"
             numOctaves="2"
           />
-          <feDisplacementMap in="SourceGraphic" scale="8" />
+          <feDisplacementMap in="SourceGraphic" scale="4" />
         </filter>
-        <radialGradient id="bibble-fur" cx="40%" cy="35%">
-          <stop offset="0" stopColor="#fff" />
-          <stop offset="0.65" stopColor="#fdf0ff" />
-          <stop offset="1" stopColor="#e6c3f4" />
+        <radialGradient id="bibble-fur" cx="45%" cy="30%">
+          <stop offset="0" stopColor="#c4e6f7" />
+          <stop offset="0.6" stopColor="#8cc6ec" />
+          <stop offset="1" stopColor="#5a8fd6" />
+        </radialGradient>
+        <radialGradient id="bibble-hair" cx="40%" cy="30%">
+          <stop offset="0" stopColor="#ff8fd0" />
+          <stop offset="1" stopColor="#e0269a" />
         </radialGradient>
       </defs>
-      <ellipse cx="40" cy="88" rx="7" ry="4" fill="#f7a8d0" />
-      <ellipse cx="60" cy="88" rx="7" ry="4" fill="#f7a8d0" />
-      <g filter="url(#bibble-fluff)" fill="url(#bibble-fur)">
-        <circle cx="50" cy="52" r="36" />
-        <path d="M42 22q-2-12 7-7 3-9 8-1 9-3 3 8z" />
+      <g fill="#f47cc0">
+        <ellipse cx="41" cy="95" rx="6" ry="3" />
+        <ellipse cx="59" cy="95" rx="6" ry="3" />
       </g>
-      {[37, 63].map((cx) => (
-        <g key={cx}>
-          <ellipse
-            cx={cx}
-            cy="47"
-            rx="10"
-            ry="13"
-            fill="#fff"
-            stroke="#d6b4e6"
+      <g filter="url(#bibble-fluff)">
+        <g fill="url(#bibble-fur)">
+          <path d="M27 42l-7-2 6-4zM73 42l7-2-6-4z" />
+          <path d="M30 55q-6 18 0 32 8 8 20 8t20-8q6-14 0-32z" />
+          <path d="M29 74q-8 2-9 8 5 1 10-3M71 74q8 2 9 8-5 1-10-3" />
+          <ellipse cx="50" cy="44" rx="25" ry="21" />
+        </g>
+        <g fill="#f47cc0" opacity="0.85">
+          <circle cx="43" cy="72" r="4" />
+          <circle cx="57" cy="78" r="3.5" />
+          <circle cx="46" cy="86" r="3" />
+          <circle cx="61" cy="68" r="2.5" />
+        </g>
+        <path
+          d="M30 30q-6-10 0-18 2 6 6 7-2-10 6-16 0 8 4 10 2-10 12-11-4 6-2 11 6-6 16-4-6 4-6 9 8-2 12 4-7 0-9 5 5 3 4 9-6-6-14-7-10 0-15 3-8 2-14 5z"
+          fill="url(#bibble-hair)"
+        />
+      </g>
+      {[40, 60].map((cx) => (
+        <g key={cx} stroke="#1d2340" strokeWidth="1">
+          <ellipse cx={cx} cy="44" rx="7.5" ry="8.5" fill="#fff" />
+          <circle
+            cx={cx + (50 - cx) / 7}
+            cy="46"
+            r="5"
+            fill="#4b5fd1"
+            stroke="none"
           />
-          <circle cx={cx + 1} cy="50" r="7.5" fill="#5ab4f5" />
-          <circle cx={cx + 1} cy="51" r="4" fill="#1d2340" />
-          <circle cx={cx + 3.5} cy="46.5" r="2.2" fill="#fff" />
+          <circle
+            cx={cx + (50 - cx) / 7}
+            cy="46.5"
+            r="2.6"
+            fill="#141633"
+            stroke="none"
+          />
+          <circle
+            cx={cx + (50 - cx) / 7 + 1.5}
+            cy="44.5"
+            r="1.2"
+            fill="#fff"
+            stroke="none"
+          />
+          <path d={`M${cx - 8} 44q0-9 8-9t8 9q-8-4-16 0z`} fill="#8cc6ec" />
         </g>
       ))}
-      <ellipse cx="25" cy="63" rx="6" ry="3.5" fill="#ff9fcf" opacity="0.7" />
-      <ellipse cx="75" cy="63" rx="6" ry="3.5" fill="#ff9fcf" opacity="0.7" />
       <path
-        d="M45 67q5 5 10 0"
-        fill="none"
-        stroke="#a3406f"
-        strokeWidth="2"
+        d="M33 40l-3-2M34 38l-2-3M66 40l3-2M65 38l2-3"
+        stroke="#1d2340"
+        strokeWidth="1.1"
+        strokeLinecap="round"
+      />
+      <ellipse cx="50" cy="53" rx="2.6" ry="2" fill="#ff6fb3" />
+      <path
+        d="M43 58q7 5 14 0"
+        fill="#fff"
+        stroke="#1d2340"
+        strokeWidth="1.1"
         strokeLinecap="round"
       />
     </svg>
