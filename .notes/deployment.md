@@ -23,8 +23,7 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 - Online rejects confidential dynamic client registration with HTTP 400.
 - Online manages production OAuth clients through Terraform in `dotkom/monoweb`.
 - The OAuth provisioning request is `https://github.com/dotkom/monoweb/issues/3719`.
-- Doppler project `ola-mastersal` has the configs `dev`, `dev_personal`, `stg`, and `prd`.
-- The Doppler scope for `/Users/olavassbotn/Developer/mastersal` uses config `stg`.
+- The Doppler project has the configs `dev`, `dev_personal`, `stg`, and `prd`.
 - Doppler config `stg` contains only the `DOPPLER_*` default names on 2026-09-29.
 - Doppler config `dev` holds `AUTH0_CLIENT_ID`, `AUTH0_CLIENT_SECRET`, `AUTH0_ISSUER`, `AUTH0_AUDIENCES`, and `AUTH0_MGMT_TENANT`.
 - The `dev` client uses the development tenant `https://auth.dev.online.ntnu.no/`, not the production issuer.
@@ -48,7 +47,6 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 ## Open decisions
 
 <!-- questions for the user. ask these before building, not after. -->
-
 
 ## Dead ends
 

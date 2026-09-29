@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["src", "api", "server", "vite.config.ts"]
+  "include": ["src", "api", "server", "scripts", "test", "vite.config.ts"]
 }
