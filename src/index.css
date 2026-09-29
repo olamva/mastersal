@@ -82,8 +82,11 @@ html {
 }
 
 .nina-intro {
-  background: #ff7ac1;
-  animation: iris 3s ease-in-out forwards;
+  animation: fade 3s ease-in-out forwards;
+}
+
+.iris {
+  animation: iris 0.54s ease-in-out both;
 }
 
 .sunburst {
@@ -118,6 +121,8 @@ html {
 }
 
 .decay {
+  backdrop-filter: sepia(1) hue-rotate(20deg) saturate(1.6) brightness(0.55)
+    contrast(1.4);
   animation: decay 3s linear forwards;
 }
 
@@ -133,6 +138,7 @@ html {
     #a9b25c99 60%,
     transparent 70%
   );
+  filter: url(#rot-fuzz);
   transform: scale(0);
   animation: mold 0.9s ease-in forwards;
 }
@@ -212,22 +218,19 @@ html {
 }
 
 @keyframes iris {
-  0% {
-    clip-path: circle(0 at 50% 50%);
+  from {
+    transform: scale(0);
   }
-  18%,
-  100% {
-    clip-path: circle(75% at 50% 50%);
-  }
+}
+
+@keyframes fade {
   75% {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
   100% {
     opacity: 0;
     transform: scale(1.4);
-    filter: blur(12px);
   }
 }
 
@@ -284,7 +287,6 @@ html {
 @keyframes droop {
   0% {
     transform: none;
-    filter: none;
   }
   10% {
     transform: rotate(-1deg) skewX(2deg);
@@ -294,33 +296,25 @@ html {
   }
   45% {
     transform: rotate(-2deg) skewX(4deg) translateY(24px) scaleY(1.07);
-    filter: blur(1px);
   }
   50% {
     transform: rotate(-2.5deg) skewX(5deg) translateY(32px) scaleY(1.1);
-    filter: blur(1.5px);
   }
   50.1%,
   100% {
     transform: none;
-    filter: none;
   }
 }
 
 @keyframes decay {
-  0% {
-    backdrop-filter: sepia(0) hue-rotate(0) saturate(1) brightness(1)
-      contrast(1);
-  }
-  30%,
-  50% {
-    backdrop-filter: sepia(1) hue-rotate(20deg) saturate(1.6) brightness(0.55)
-      contrast(1.4);
-    opacity: 1;
-  }
+  0%,
   50.1%,
   100% {
     opacity: 0;
+  }
+  30%,
+  50% {
+    opacity: 1;
   }
 }
 
