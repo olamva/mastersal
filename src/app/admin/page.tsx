@@ -4,7 +4,7 @@ import { getSyncState, hasOAuthConnection } from "@/lib/db";
 import { validateAdminSession } from "@/lib/session";
 import Link from "next/link";
 
-const dateTime = new Intl.DateTimeFormat("nb-NO", { dateStyle: "medium", timeStyle: "short" });
+const dateTime = new Intl.DateTimeFormat("nb-NO", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Oslo" });
 
 export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
   const [cookieStore, { error }] = await Promise.all([cookies(), searchParams]);

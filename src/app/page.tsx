@@ -5,7 +5,7 @@ import { loadSnapshotWithFallback } from "@/lib/sync-policy";
 import type { PublicSnapshot, SafeSyncState } from "@/lib/types";
 
 const kroner = new Intl.NumberFormat("nb-NO", { style: "currency", currency: "NOK", maximumFractionDigits: 0 });
-const dateTime = new Intl.DateTimeFormat("nb-NO", { dateStyle: "medium", timeStyle: "short" });
+const dateTime = new Intl.DateTimeFormat("nb-NO", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Oslo" });
 
 function MemberCard({ member, rank }: { member: NonNullable<Awaited<ReturnType<typeof getSnapshot>>>["members"][number]; rank: number }) {
   return (
