@@ -23,16 +23,16 @@ export default function App() {
           DE
           <br />
           <span className="-ml-6 inline-block -rotate-1">
-            {(snapshot?.groupName ?? "mastersal").toUpperCase()} &amp; KEBAP
+            {(snapshot?.groupName ?? "A4-131").toUpperCase()} &amp; KEBAP
           </span>
         </h1>
-        <span className="rotate-[20deg] text-6xl sm:text-8xl">🥙</span>
+        <span className="rotate-20 text-6xl sm:text-8xl">🥙</span>
       </div>
       <p className="mt-2 text-center font-hand text-5xl leading-none">
         ~~~o~o~~~
       </p>
       <p className="mt-2 text-center font-wide text-sm tracking-[0.2em] sm:text-lg">
-        VIN * STRAFF * KEBAB * SKAM * FALAFEL
+        GANKE * STRAFF * KEBAB * SKAM * FALAFEL
       </p>
       <div className="mt-8 grid gap-10 sm:grid-cols-[19rem_1fr]">
         <div className="space-y-8 font-meny">
