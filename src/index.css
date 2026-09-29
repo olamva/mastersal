@@ -7,6 +7,10 @@
   --font-wide: "Archivo Black", Impact, sans-serif;
   --font-meny: "Times New Roman", Times, serif;
   --font-hand: "Caveat", "Comic Sans MS", cursive;
+  --color-barbie: #e0218a;
+  --color-plum: #a30d5f;
+  --color-blush: #ffd6ec;
+  --font-script: "Pacifico", cursive;
 }
 
 .wordart {
@@ -20,4 +24,386 @@
 html {
   background: var(--color-kebab);
   scrollbar-color: var(--color-navy) var(--color-kebab);
+}
+
+.nina {
+  background: linear-gradient(160deg, #fff0f8, #ffc9e6 50%, #ff9fd2) fixed;
+  scrollbar-color: var(--color-barbie) var(--color-blush);
+}
+
+@utility glitter {
+  background:
+    linear-gradient(110deg, transparent 42%, #fffc 50%, transparent 58%) 150%
+      0 / 250% 100% no-repeat,
+    radial-gradient(circle, #fffc 0 1px, transparent 1.5px) 0 0 / 7px 7px,
+    radial-gradient(circle, #ffb3dc 0 1px, transparent 1.5px) 3px 3px / 9px 9px,
+    linear-gradient(var(--color-barbie), var(--color-plum));
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@utility barbie-logo {
+  font-family: var(--font-script);
+  color: var(--color-barbie);
+  -webkit-text-stroke: 0.06em #fff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0.04em 0 var(--color-plum));
+}
+
+.enter {
+  animation: enter 0.8s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  animation-delay: calc(0.6s + var(--i, 0) * 0.1s);
+}
+
+.sparkle {
+  position: absolute;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, #fff 25%, #ffc2e2 55%, #ff5fb0);
+  clip-path: polygon(
+    50% 0,
+    60% 40%,
+    100% 50%,
+    60% 60%,
+    50% 100%,
+    40% 60%,
+    0 50%,
+    40% 40%
+  );
+}
+
+.twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.bibble {
+  animation: bob 2.4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 6px 8px #d94c9a66);
+}
+
+.nina-intro {
+  background: #ff7ac1;
+  animation: iris 3s ease-in-out forwards;
+}
+
+.sunburst {
+  background:
+    radial-gradient(circle, #fff 0, #ffe3f1 6%, transparent 40%),
+    repeating-conic-gradient(#ff4fa8 0 7.5deg, #ff8cc8 7.5deg 15deg);
+  animation: spin 14s linear infinite;
+}
+
+.burst {
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  animation: burst 1.8s ease-out forwards;
+}
+
+.nina-logo {
+  font-size: clamp(6rem, 24vw, 17rem);
+  line-height: 1.3;
+  filter: drop-shadow(0 8px 0 #a30d5f) drop-shadow(0 0 40px #fff);
+  animation: pop 3s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+.nina-tagline {
+  text-shadow: 0 2px 0 #a30d5f;
+  animation: rise 3s ease-out both;
+}
+
+.rotting {
+  transform-origin: top center;
+  animation: droop 3s ease-in forwards;
+}
+
+.decay {
+  animation: decay 3s linear forwards;
+}
+
+.mold {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #2e2a0e 0 18%,
+    #4d5a1c 32%,
+    #7d8f2a 48%,
+    #a9b25c99 60%,
+    transparent 70%
+  );
+  transform: scale(0);
+  animation: mold 0.9s ease-in forwards;
+}
+
+.sludge {
+  background:
+    radial-gradient(circle at 20% 30%, #8a9a2a 0 2%, transparent 2.5%),
+    radial-gradient(circle at 75% 55%, #2e2610 0 4%, transparent 4.5%),
+    radial-gradient(circle at 40% 80%, #7a8a26 0 3%, transparent 3.5%),
+    linear-gradient(#6b7a1f, #4a4a16 45%, #3a2c10);
+  animation: ooze 3s ease-in-out forwards;
+}
+
+.gonke-text {
+  font-family: "Comic Sans MS", "Papyrus", cursive;
+  font-size: clamp(4rem, 18vw, 12rem);
+  font-weight: bold;
+  color: #a4b82c;
+  -webkit-text-stroke: 3px #2e2610;
+  text-shadow: 0 10px 0 #4d5a1c;
+  transform-origin: top center;
+  animation: melt 3s ease-in forwards;
+}
+
+.flies {
+  animation: flies 3s linear forwards;
+}
+
+.fly {
+  position: absolute;
+  font-size: 2rem;
+  animation: buzz 0.5s steps(4) infinite alternate;
+}
+
+@keyframes shimmer {
+  0%,
+  30% {
+    background-position:
+      150% 0,
+      0 0,
+      3px 3px,
+      0 0;
+  }
+  100% {
+    background-position:
+      -50% 0,
+      0 0,
+      3px 3px,
+      0 0;
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(2rem) scale(0.9);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(0) rotate(0);
+  }
+  50% {
+    transform: scale(1) rotate(90deg);
+  }
+}
+
+@keyframes bob {
+  from {
+    transform: translateY(-6px) rotate(-6deg);
+  }
+  to {
+    transform: translateY(6px) rotate(6deg);
+  }
+}
+
+@keyframes iris {
+  0% {
+    clip-path: circle(0 at 50% 50%);
+  }
+  18%,
+  100% {
+    clip-path: circle(75% at 50% 50%);
+  }
+  75% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+    filter: blur(12px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(calc(var(--x) - 50%), calc(var(--y) - 50%)) scale(1)
+      rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--x) * 1.2 - 50%), calc(var(--y) * 1.2 - 50%))
+      scale(0) rotate(270deg);
+  }
+}
+
+@keyframes pop {
+  0%,
+  8% {
+    transform: scale(0) rotate(-20deg);
+  }
+  25% {
+    transform: scale(1.12) rotate(-4deg);
+  }
+  32%,
+  100% {
+    transform: scale(1) rotate(-6deg);
+  }
+}
+
+@keyframes rise {
+  0%,
+  28% {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  40%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes droop {
+  0% {
+    transform: none;
+    filter: none;
+  }
+  10% {
+    transform: rotate(-1deg) skewX(2deg);
+  }
+  25% {
+    transform: rotate(1.5deg) skewX(-3deg) translateY(10px) scaleY(1.04);
+  }
+  45% {
+    transform: rotate(-2deg) skewX(4deg) translateY(24px) scaleY(1.07);
+    filter: blur(1px);
+  }
+  50% {
+    transform: rotate(-2.5deg) skewX(5deg) translateY(32px) scaleY(1.1);
+    filter: blur(1.5px);
+  }
+  50.1%,
+  100% {
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes decay {
+  0% {
+    backdrop-filter: sepia(0) hue-rotate(0) saturate(1) brightness(1)
+      contrast(1);
+  }
+  30%,
+  50% {
+    backdrop-filter: sepia(1) hue-rotate(20deg) saturate(1.6) brightness(0.55)
+      contrast(1.4);
+    opacity: 1;
+  }
+  50.1%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes mold {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes ooze {
+  0%,
+  32% {
+    transform: translateY(-160vh);
+  }
+  46% {
+    transform: translateY(-25vh);
+  }
+  58% {
+    transform: translateY(-15vh);
+  }
+  100% {
+    transform: translateY(130vh);
+  }
+}
+
+@keyframes melt {
+  0%,
+  40% {
+    opacity: 0;
+    transform: none;
+  }
+  46% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(4vh) scaleY(1.7) skewX(-8deg);
+    filter: blur(3px);
+  }
+  66%,
+  100% {
+    opacity: 0;
+    transform: translateY(8vh) scaleY(2.2) skewX(-10deg);
+    filter: blur(6px);
+  }
+}
+
+@keyframes flies {
+  0% {
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes buzz {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+  33% {
+    transform: translate(3rem, -2rem) rotate(40deg);
+  }
+  66% {
+    transform: translate(-1.5rem, 1.5rem) rotate(-30deg);
+  }
+  100% {
+    transform: translate(2.5rem, 2rem) rotate(80deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx {
+    display: none;
+  }
+
+  * {
+    animation: none !important;
+  }
 }
