@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Snapshot } from "../server/members";
 
-const kroner = new Intl.NumberFormat("nb-NO", { style: "currency", currency: "NOK", maximumFractionDigits: 0 });
-
 export default function App() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>();
 
@@ -11,24 +9,46 @@ export default function App() {
   }, []);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16 text-stone-900 dark:text-stone-100">
-      <h1 className="text-5xl font-bold tracking-tight">{snapshot?.groupName ?? "mastersal"}</h1>
-      {snapshot?.members.length ? (
-        <table className="mt-8 w-full tabular-nums">
-          <thead className="text-sm text-stone-500">
-            <tr><th className="p-2 text-left font-medium">Navn</th><th className="p-2 text-right font-medium">Skyldig</th><th className="p-2 text-right font-medium">Straffer</th></tr>
-          </thead>
-          <tbody>
-            {snapshot.members.map((member) => (
-              <tr key={member.id} className="border-t border-stone-200 dark:border-stone-800">
-                <td className="p-2">{member.displayName}</td>
-                <td className="p-2 text-right font-semibold text-rose-700 dark:text-rose-400">{kroner.format(member.unpaidValue)}</td>
-                <td className="p-2 text-right">{member.punishmentCount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : snapshot !== undefined && <p className="mt-8 text-stone-500">Ingen publiserte data ennå.</p>}
+    <main className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-10 pb-6 text-navy">
+      <p className="wordart absolute top-4 right-2 rotate-6 font-meny text-3xl font-bold sm:text-4xl">GRATIS LEVERING</p>
+      <div className="flex items-center justify-center gap-4">
+        <span className="-rotate-12 text-7xl sm:text-9xl">🍕</span>
+        <h1 className="text-center font-wide text-4xl leading-none tracking-[0.15em] sm:text-6xl">HUS<br />DE<br /><span className="-ml-6 inline-block -rotate-1">{(snapshot?.groupName ?? "mastersal").toUpperCase()} &amp; KEBAP</span></h1>
+        <span className="rotate-[20deg] text-6xl sm:text-8xl">🥙</span>
+      </div>
+      <p className="mt-2 text-center font-hand text-5xl leading-none">~~~o~o~~~</p>
+      <p className="mt-2 text-center font-wide text-sm tracking-[0.2em] sm:text-lg">VIN * STRAFF * KEBAB * SKAM * FALAFEL</p>
+      <div className="mt-8 grid gap-10 sm:grid-cols-[19rem_1fr]">
+        <div className="space-y-8 font-meny">
+          <div>
+            <p className="text-xl font-bold">KEBABVEGEN 1, MASTERSAL</p>
+            <p className="wordart text-4xl font-bold">Tel. 384 562 6969</p>
+          </div>
+          <div className="w-56 -rotate-2 border-4 border-dashed border-navy bg-white px-3 py-2">
+            <p className="text-2xl font-bold">SPESIALTILBUD</p>
+            <p className="flex items-center gap-2"><span className="font-hand text-6xl">20%</span><span className="text-lg font-bold leading-tight whitespace-nowrap">KJØP 3<br />OG FÅ RABATT</span></p>
+            <p className="text-[10px]">*gjelder ikke straffer</p>
+          </div>
+        </div>
+        <section>
+          <h2 className="flex items-end gap-2"><span className="bg-navy px-5 py-0.5 font-meny text-2xl font-bold text-white">§ SKYLDIG</span><span className="-rotate-3 font-hand text-3xl">&amp; DRIKKE</span></h2>
+          {snapshot?.members.length ? (
+            <ul className="mt-4 space-y-3 font-meny">
+              {snapshot.members.map((member) => (
+                <li key={member.id}>
+                  <div className="flex items-end gap-1">
+                    <span className="font-bold uppercase">{member.displayName}</span>
+                    <span className="mb-1 flex-1 border-b-2 border-dotted border-navy" />
+                    {String(member.unpaidValue).split("").map((digit, index) => <span key={index} className="inline-block w-5 bg-white text-center font-bold text-saus">{digit}</span>)}
+                    <span className="font-bold">,-</span>
+                  </div>
+                  <p className="text-xs">{member.punishmentCount} straffer, løk, saus</p>
+                </li>
+              ))}
+            </ul>
+          ) : snapshot !== undefined && <p className="mt-4 font-meny">Ingen publiserte data ennå. Kokken er på røykepause.</p>}
+        </section>
+      </div>
     </main>
   );
 }
