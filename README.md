@@ -45,7 +45,7 @@ https://<production-domain>/api/auth/callback
 
 ## Synchronization
 
-`/api/snapshot` starts a background synchronization when the snapshot is older than five minutes. It returns the previous snapshot during that work.
+`/api/snapshot` synchronizes on each visit before it returns the snapshot. It returns the stored snapshot when the synchronization fails.
 
 The Vercel cron calls `/api/cron` each day with `CRON_SECRET`.
 
