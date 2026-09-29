@@ -12,7 +12,9 @@
 .wordart {
   -webkit-text-stroke: 1.5px var(--color-saus);
   color: var(--color-kebab);
-  text-shadow: 2px 2px 0 var(--color-saus), 4px 4px 0 #fff;
+  text-shadow:
+    2px 2px 0 var(--color-saus),
+    4px 4px 0 #fff;
 }
 
 html {
