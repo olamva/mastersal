@@ -23,10 +23,28 @@ Create and publish the public mastersal Vinstraff website with secure Online OAu
 - Online rejects confidential dynamic client registration with HTTP 400.
 - Online manages production OAuth clients through Terraform in `dotkom/monoweb`.
 - The OAuth provisioning request is `https://github.com/dotkom/monoweb/issues/3719`.
+- Doppler project `ola-mastersal` has the configs `dev`, `dev_personal`, `stg`, and `prd`.
+- The Doppler scope for `/Users/olavassbotn/Developer/mastersal` uses config `stg`.
+- Doppler config `stg` contains only the `DOPPLER_*` default names on 2026-09-29.
+- Doppler config `dev` holds `AUTH0_CLIENT_ID`, `AUTH0_CLIENT_SECRET`, `AUTH0_ISSUER`, `AUTH0_AUDIENCES`, and `AUTH0_MGMT_TENANT`.
+- The `dev` client uses the development tenant `https://auth.dev.online.ntnu.no/`, not the production issuer.
+- The `dev` client secret authenticates, but the client does not allow `client_credentials`.
+- The `dev` client allows only `http://localhost:3000/api/auth/callback` among the tested callbacks.
+- The `dev` client rejects `https://mastersal.vercel.app/api/auth/callback` with HTTP 403.
+- Production Vinstraff at `vinstraff.no` uses the production issuer `https://auth.online.ntnu.no`.
+- Vinstraff has no reachable development API host.
+- Doppler config `prd` holds the same `AUTH0_*` names with issuer `https://auth.online.ntnu.no`.
+- The `prd` client accepts `https://mastersal.vercel.app/api/auth/callback` and `http://localhost:3000/api/auth/callback`.
+- Vercel Production received `ONLINE_CLIENT_ID` and `ONLINE_CLIENT_SECRET` from Doppler `prd` on 2026-09-29.
+- `ADMIN_SETUP_SECRET` was rotated on 2026-09-29; Doppler `prd` holds the current value.
+- The production deployment of 2026-09-29 reports database `ok` and OAuth `authorization_required`.
+- Doppler names the client values `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET`; the app reads `ONLINE_*`.
+- `mastersal-scaffold` is the unchanged `create-next-app` output from 2026-09-16.
 
 ## Open decisions
 
 <!-- questions for the user. ask these before building, not after. -->
+
 
 ## Dead ends
 

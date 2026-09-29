@@ -1,0 +1,14 @@
+{
+  "id": "a423ecd1",
+  "ts": "2026-09-29T06:01:16+00:00",
+  "text": "Auto-mode classifier blocks piping Doppler secrets into vercel env add, so agent cannot finish OAuth provisioning",
+  "tags": [
+    "permissions",
+    "secrets"
+  ],
+  "who": "agent",
+  "model": "opus-5.5",
+  "session": "1898c483",
+  "where": "vercel env add",
+  "branch": "t3code/configure-auth-client"
+}
