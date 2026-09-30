@@ -6,11 +6,11 @@ const months: FirstMonth[] = [
   { month: "2026-09", counts: { Alan: 7, Grace: 5, Ada: 0 } },
 ];
 
-it("accumulates the totals for each person in the order of first appearance", () => {
+it("lists the counts and the running totals for each person in the order of first appearance", () => {
   expect(series(months)).toEqual([
-    { name: "Ada", totals: [9, 9] },
-    { name: "Grace", totals: [4, 9] },
-    { name: "Alan", totals: [0, 7] },
+    { name: "Ada", counts: [9, 0], totals: [9, 9] },
+    { name: "Grace", counts: [4, 5], totals: [4, 9] },
+    { name: "Alan", counts: [0, 7], totals: [0, 7] },
   ]);
 });
 

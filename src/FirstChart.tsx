@@ -15,6 +15,7 @@ const left = 32;
 const right = 16;
 const top = 12;
 const bottom = 28;
+const modes = { totals: "Totalt", counts: "Per måned" };
 
 interface FirstChartProps {
   months: FirstMonth[];
@@ -24,9 +25,13 @@ interface FirstChartProps {
 export const FirstChart = ({ months, className }: FirstChartProps) => {
   const [hovered, setHovered] = useState<number>();
   const active = hovered ?? months.length - 1;
-  const lines = series(months);
+  const [mode, setMode] = useState<keyof typeof modes>("totals");
+  const lines = series(months).map((line) => ({
+    name: line.name,
+    values: line[mode],
+  }));
   const step = Math.ceil(
-    Math.max(1, ...lines.map(({ totals }) => totals.at(-1)!)) / 4,
+    Math.max(1, ...lines.flatMap(({ values }) => values)) / 4,
   );
   const band = (width - left - right) / months.length;
   const x = (index: number) => left + band * (index + 0.5);
@@ -36,18 +41,33 @@ export const FirstChart = ({ months, className }: FirstChartProps) => {
 
   return (
     <figure className={`bg-white p-3 font-meny ${className}`}>
-      <figcaption className="font-bold">
-        Dager først til og med {monthName(months[active].month)}
+      <figcaption className="flex flex-wrap items-center justify-between gap-2">
+        <span className="font-bold">
+          Dager først {mode === "totals" ? "til og med" : "i"}{" "}
+          {monthName(months[active].month)}
+        </span>
+        <span className="flex border border-current text-sm">
+          {Object.entries(modes).map(([key, label]) => (
+            <button
+              key={key}
+              aria-pressed={key === mode}
+              className="cursor-pointer px-2 aria-pressed:bg-current"
+              onClick={() => setMode(key as keyof typeof modes)}
+            >
+              <span className="in-aria-pressed:text-white">{label}</span>
+            </button>
+          ))}
+        </span>
       </figcaption>
       <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-        {lines.map(({ name, totals }, index) => (
+        {lines.map(({ name, values }, index) => (
           <li key={name} className="flex items-center gap-1.5">
             <span
               className="size-2.5 rounded-full"
               style={{ background: colors[index % colors.length] }}
             />
             {name}
-            <span className="font-bold tabular-nums">{totals[active]}</span>
+            <span className="font-bold tabular-nums">{values[active]}</span>
           </li>
         ))}
       </ul>
@@ -85,11 +105,11 @@ export const FirstChart = ({ months, className }: FirstChartProps) => {
             stroke="#898781"
           />
         )}
-        {lines.map(({ name, totals }, index) => (
+        {lines.map(({ name, values }, index) => (
           <g key={name} fill={colors[index % colors.length]}>
             <polyline
-              points={totals
-                .map((total, month) => `${x(month)},${y(total)}`)
+              points={values
+                .map((value, month) => `${x(month)},${y(value)}`)
                 .join(" ")}
               fill="none"
               stroke={colors[index % colors.length]}
@@ -97,11 +117,11 @@ export const FirstChart = ({ months, className }: FirstChartProps) => {
               strokeLinejoin="round"
               strokeLinecap="round"
             />
-            {totals.map((total, month) => (
+            {values.map((value, month) => (
               <circle
                 key={month}
                 cx={x(month)}
-                cy={y(total)}
+                cy={y(value)}
                 r={month === active ? 5 : 3}
                 stroke="#fff"
                 strokeWidth={2}
