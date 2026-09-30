@@ -24,15 +24,16 @@ export const useTheme = () => {
   useEffect(() => {
     if (!effect) return;
     const timers = [
+      setTimeout(
+        () =>
+          document.documentElement.classList.toggle("nina", effect === "nina"),
+        effect === "nina" ? 500 : 1500,
+      ),
       setTimeout(() => setTheme(effect), 1500),
       setTimeout(() => setEffect(undefined), 3000),
     ];
     return () => timers.forEach(clearTimeout);
   }, [effect]);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("nina", theme === "nina");
-  }, [theme]);
 
   return { theme, effect };
 };
