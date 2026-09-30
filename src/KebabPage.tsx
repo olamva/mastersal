@@ -5,7 +5,7 @@ interface KebabPageProps {
 }
 
 export const KebabPage = ({ snapshot }: KebabPageProps) => (
-  <main className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-10 pb-6 text-navy">
+  <main className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-10 pb-6 text-navy xl:[zoom:1.25] 2xl:[zoom:1.5] min-[120rem]:[zoom:1.75]">
     <p className="wordart absolute top-4 right-2 rotate-6 font-meny text-3xl font-bold sm:text-4xl">
       GRATIS LEVERING
     </p>
@@ -26,7 +26,7 @@ export const KebabPage = ({ snapshot }: KebabPageProps) => (
       ~~~o~o~~~
     </p>
     <p className="mt-2 text-center font-wide text-sm tracking-[0.2em] sm:text-lg">
-      GANKE * STRAFF * KEBAB * SKAM * FALAFEL
+      PIZZA * KEBAB * BURGER * LASAGNE * FALAFEL
     </p>
     <div className="mt-8 grid gap-10 sm:grid-cols-[19rem_1fr]">
       <div className="space-y-8 font-meny">
