@@ -130,9 +130,11 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
             </p>
           )
         )}
-        <p className="mt-16 text-center font-script text-2xl">
-          Hi Barbie! Hi Ken! Hi {group}!
-        </p>
+        {snapshot !== undefined && (
+          <p className="mt-16 text-center font-script text-2xl">
+            Hi Barbie! Hi Ken! Hi {group}!
+          </p>
+        )}
       </main>
     </>
   );
