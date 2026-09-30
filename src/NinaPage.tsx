@@ -42,7 +42,9 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
               <span className="block font-wide text-[10px] tracking-[0.3em]">
                 TOTALT SKYLDIG
               </span>
-              <span className="font-script text-4xl text-barbie">
+              <span
+                className={`font-script text-4xl text-barbie ${snapshot === undefined ? "invisible" : ""}`}
+              >
                 {snapshot?.members.reduce(
                   (sum, member) => sum + member.unpaidValue,
                   0,
