@@ -19,6 +19,7 @@ export const series = (months: FirstMonth[]) =>
       let total = 0;
       return {
         name,
+        counts: months.map(({ counts }) => counts[name] ?? 0),
         totals: months.map(({ counts }) => (total += counts[name] ?? 0)),
       };
     },

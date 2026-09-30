@@ -1,0 +1,14 @@
+{
+  "id": "1b27a1bd",
+  "ts": "2026-09-30T12:14:25+00:00",
+  "text": "Vite configureServer with a concise arrow returns the connect app and Vite calls it as a post hook, which crashes on start",
+  "tags": [
+    "tools",
+    "vite"
+  ],
+  "who": "agent",
+  "model": "opus-5.5",
+  "session": "0713f279",
+  "where": "/Users/olavassbotn/.t3/worktrees/mastersal/t3code-db9dcfec",
+  "branch": "t3code/graph-cumulative-toggle"
+}
