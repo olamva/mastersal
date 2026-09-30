@@ -17,6 +17,9 @@ export default function App() {
 
   return (
     <>
+      <div
+        className={`fixed inset-0 -z-10 ${theme === "nina" ? "bg-[linear-gradient(160deg,#fff0f8,#ffc9e6_50%,#ff9fd2)]" : "bg-kebab"}`}
+      />
       {theme === "nina" ? (
         <NinaPage snapshot={snapshot} rotting={effect === "kebab"} />
       ) : (
