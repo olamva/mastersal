@@ -27,8 +27,7 @@ html {
 }
 
 .nina {
-  background: linear-gradient(160deg, #fff0f8, #ffc9e6 50%, #ff9fd2) fixed
-    #ffc9e6;
+  background: #ffc9e6;
   scrollbar-color: var(--color-barbie) var(--color-blush);
 }
 
