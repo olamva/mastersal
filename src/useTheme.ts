@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
+import ninaIcon from "./assets/nina-icon.png";
 
 export type Theme = "kebab" | "nina";
 
 const codes = { nina: "nina", kebab: "gonke" };
+const icon = document.querySelector<HTMLLinkElement>("link[rel=icon]")!;
+const heads = {
+  kebab: { title: document.title, icon: icon.href },
+  nina: { title: "Drømmesalen · A4-131", icon: ninaIcon },
+};
 
 export const useTheme = () => {
   const [theme, setTheme] = useState<Theme>("kebab");
@@ -34,6 +40,11 @@ export const useTheme = () => {
     ];
     return () => timers.forEach(clearTimeout);
   }, [effect]);
+
+  useEffect(() => {
+    document.title = heads[theme].title;
+    icon.href = heads[theme].icon;
+  }, [theme]);
 
   return { theme, effect };
 };
