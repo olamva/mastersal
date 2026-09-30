@@ -11,7 +11,9 @@ const heads = {
 };
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState<Theme>("kebab");
+  const [theme, setTheme] = useState<Theme>(
+    localStorage.theme === "nina" ? "nina" : "kebab",
+  );
   const [effect, setEffect] = useState<Theme>();
 
   useEffect(() => {
@@ -44,6 +46,7 @@ export const useTheme = () => {
   useEffect(() => {
     document.title = heads[theme].title;
     icon.href = heads[theme].icon;
+    localStorage.theme = theme;
   }, [theme]);
 
   return { theme, effect };
