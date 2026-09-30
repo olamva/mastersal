@@ -31,7 +31,7 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
             MASTERSAL {group.toUpperCase()} PRESENTERER
           </p>
           <h1 className="barbie-logo -rotate-3 text-[clamp(3.5rem,13vw,8rem)] leading-tight">
-            Drømmehuset
+            Drømmesalen
           </h1>
           <p className="font-meny text-xl italic">der alle skylder vin</p>
           <div className="mt-6 flex items-center justify-center gap-3 sm:gap-6">
