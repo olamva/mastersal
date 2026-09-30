@@ -18,9 +18,10 @@ const bottom = 28;
 
 interface FirstChartProps {
   months: FirstMonth[];
+  className: string;
 }
 
-export const FirstChart = ({ months }: FirstChartProps) => {
+export const FirstChart = ({ months, className }: FirstChartProps) => {
   const [hovered, setHovered] = useState<number>();
   const active = hovered ?? months.length - 1;
   const lines = series(months);
@@ -34,7 +35,7 @@ export const FirstChart = ({ months }: FirstChartProps) => {
   const labelEvery = Math.ceil(months.length / 8);
 
   return (
-    <figure className="border-4 border-dashed border-navy bg-white p-3 font-meny">
+    <figure className={`bg-white p-3 font-meny ${className}`}>
       <figcaption className="font-bold">
         Dager først til og med {monthName(months[active].month)}
       </figcaption>

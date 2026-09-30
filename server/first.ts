@@ -41,3 +41,6 @@ export const monthName = (month: string) =>
     month: "long",
     year: "numeric",
   });
+
+export const days = (total: number) =>
+  `${total} ${total === 1 ? "dag" : "dager"}`;
