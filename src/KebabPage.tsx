@@ -45,6 +45,9 @@ export const KebabPage = ({ snapshot }: KebabPageProps) => (
           </p>
           <p className="text-[10px]">*gjelder ikke straffer</p>
         </div>
+        <a href="/first" className="block text-xl font-bold underline">
+          🏆 FØRST PÅ SALEN →
+        </a>
       </div>
       <section>
         <h2 className="flex items-end gap-2">

@@ -1,0 +1,13 @@
+{
+  "id": "5c151132",
+  "ts": "2026-09-30T11:34:08+00:00",
+  "text": "preview_snapshot repeats the full console, network and action history in each result, even with a saved screenshot",
+  "tags": [
+    "tools"
+  ],
+  "who": "agent",
+  "model": "opus-5.5",
+  "session": "35521446",
+  "where": "mcp__t3-code__preview_snapshot",
+  "branch": "t3code/first-totals"
+}

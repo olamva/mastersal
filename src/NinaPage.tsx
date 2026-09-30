@@ -135,6 +135,9 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
         {snapshot !== undefined && (
           <p className="mt-16 text-center font-script text-2xl">
             Hi Barbie! Hi Ken! Hi {group}!
+            <a href="/first" className="mt-2 block text-lg underline">
+              🏆 Først på salen
+            </a>
           </p>
         )}
       </main>
