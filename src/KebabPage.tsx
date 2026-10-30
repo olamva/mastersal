@@ -1,4 +1,6 @@
 import type { Snapshot } from "../server/members";
+import kebab from "./assets/kebap.webp";
+import pizza from "./assets/pizza.webp";
 
 interface KebabPageProps {
   snapshot?: Snapshot | null;
@@ -10,7 +12,11 @@ export const KebabPage = ({ snapshot }: KebabPageProps) => (
       GRATIS LEVERING
     </p>
     <div className="flex items-center justify-center gap-4">
-      <span className="-rotate-12 text-7xl sm:text-9xl">🍕</span>
+      <img
+        className="size-25 -rotate-12 object-contain"
+        src={pizza}
+        alt="pizza"
+      />
       <h1 className="text-center font-wide text-4xl leading-none tracking-[0.15em] sm:text-6xl">
         HUS
         <br />
@@ -20,7 +26,11 @@ export const KebabPage = ({ snapshot }: KebabPageProps) => (
           {(snapshot?.groupName ?? "A4-131").toUpperCase()} &amp; KEBAP
         </span>
       </h1>
-      <span className="rotate-20 text-6xl sm:text-8xl">🥙</span>
+      <img
+        className="size-25 rotate-20 object-contain"
+        src={kebab}
+        alt="Kebab"
+      />
     </div>
     <p className="mt-2 text-center font-hand text-5xl leading-none">
       ~~~o~o~~~
