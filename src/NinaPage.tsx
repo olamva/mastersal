@@ -85,7 +85,7 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
                         {member.displayName.toUpperCase()}
                       </span>
                       <span className="whitespace-nowrap">
-                        TILBEHØR{" "}
+                        STRAFFER{" "}
                         <span className="inline-block transition group-open:rotate-90">
                           ▸
                         </span>
