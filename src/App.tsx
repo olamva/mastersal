@@ -10,9 +10,13 @@ export default function App() {
   const { theme, effect } = useTheme();
 
   useEffect(() => {
-    fetch("/api/snapshot")
-      .then((response) => response.json())
-      .then(setSnapshot, () => setSnapshot(null));
+    const load = () =>
+      fetch("/api/snapshot")
+        .then((response) => response.json())
+        .then(setSnapshot, () => setSnapshot((current) => current ?? null));
+    load();
+    const interval = setInterval(() => document.hidden || load(), 60_000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
