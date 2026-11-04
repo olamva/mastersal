@@ -7,39 +7,41 @@ interface KebabPageProps {
 }
 
 export const KebabPage = ({ snapshot }: KebabPageProps) => (
-  <main className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-10 pb-6 text-navy xl:[zoom:1.25] 2xl:[zoom:1.5] min-[120rem]:[zoom:1.75]">
+  <main className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-10 pb-6 text-navy [zoom:var(--z,1)] xl:[--z:1.25] 2xl:grid 2xl:min-h-[calc(100dvh/var(--z))] 2xl:max-w-none 2xl:grid-cols-[auto_1fr] 2xl:grid-rows-[1fr_auto] 2xl:gap-x-12 2xl:px-10 min-[120rem]:[--z:1.5]">
     <p className="wordart absolute top-4 right-2 rotate-6 font-meny text-3xl font-bold sm:text-4xl">
       GRATIS LEVERING
     </p>
-    <div className="flex items-center justify-center gap-4">
-      <img
-        className="size-25 -rotate-12 object-contain"
-        src={pizza}
-        alt="pizza"
-      />
-      <h1 className="text-center font-wide text-4xl leading-none tracking-[0.15em] sm:text-6xl">
-        HUS
-        <br />
-        DE
-        <br />
-        <span className="-ml-6 inline-block -rotate-1">
-          {(snapshot?.groupName ?? "A4-131").toUpperCase()} &amp; KEBAP
-        </span>
-      </h1>
-      <img
-        className="size-25 rotate-20 object-contain"
-        src={kebab}
-        alt="Kebab"
-      />
-    </div>
-    <p className="mt-2 text-center font-hand text-5xl leading-none">
-      ~~~o~o~~~
-    </p>
-    <p className="mt-2 text-center font-wide text-sm tracking-[0.2em] sm:text-lg">
-      PIZZA * KEBAB * BURGER * LASAGNE * FALAFEL
-    </p>
-    <div className="mt-8 grid gap-10 sm:grid-cols-[19rem_1fr]">
-      <div className="space-y-8 font-meny">
+    <header className="2xl:self-center">
+      <div className="flex items-center justify-center gap-4">
+        <img
+          className="size-25 -rotate-12 object-contain"
+          src={pizza}
+          alt="pizza"
+        />
+        <h1 className="text-center font-wide text-4xl leading-none tracking-[0.15em] sm:text-6xl 2xl:text-5xl">
+          HUS
+          <br />
+          DE
+          <br />
+          <span className="-ml-6 inline-block -rotate-1">
+            {(snapshot?.groupName ?? "A4-131").toUpperCase()} &amp; KEBAP
+          </span>
+        </h1>
+        <img
+          className="size-25 rotate-20 object-contain"
+          src={kebab}
+          alt="Kebab"
+        />
+      </div>
+      <p className="mt-2 text-center font-hand text-5xl leading-none">
+        ~~~o~o~~~
+      </p>
+      <p className="mt-2 text-center font-wide text-sm tracking-[0.2em] sm:text-lg">
+        PIZZA * KEBAB * BURGER * LASAGNE * FALAFEL
+      </p>
+    </header>
+    <div className="mt-8 grid gap-10 sm:grid-cols-[19rem_1fr] 2xl:contents">
+      <div className="space-y-8 font-meny 2xl:mt-8 2xl:grid 2xl:grid-cols-2 2xl:gap-x-8 2xl:space-y-0">
         <div>
           <p className="text-xl font-bold">KEBABVEGEN 1, MASTERSAL</p>
           <p className="wordart text-4xl font-bold">Tel. 384 562 6969</p>
@@ -59,7 +61,7 @@ export const KebabPage = ({ snapshot }: KebabPageProps) => (
           🏆 FØRST PÅ SALEN →
         </a>
       </div>
-      <section>
+      <section className="2xl:col-start-2 2xl:row-span-2 2xl:row-start-1 2xl:flex 2xl:flex-col 2xl:pt-16">
         <h2 className="flex items-end gap-2">
           <span className="bg-navy px-5 py-0.5 font-meny text-2xl font-bold text-white">
             § SKYLDIG
@@ -67,7 +69,7 @@ export const KebabPage = ({ snapshot }: KebabPageProps) => (
           <span className="-rotate-3 font-hand text-3xl">&amp; DRIKKE</span>
         </h2>
         {snapshot?.members.length ? (
-          <ul className="mt-4 space-y-3 font-meny">
+          <ul className="mt-4 space-y-3 font-meny 2xl:flex 2xl:flex-1 2xl:flex-col 2xl:justify-evenly 2xl:space-y-0 2xl:text-xl">
             {snapshot.members.map((member) => (
               <li key={member.id}>
                 <details className="group">
@@ -82,14 +84,14 @@ export const KebabPage = ({ snapshot }: KebabPageProps) => (
                         .map((digit, index) => (
                           <span
                             key={index}
-                            className="inline-block w-5 bg-white text-center font-bold text-saus"
+                            className="inline-block w-5 bg-white 2xl:w-6 text-center font-bold text-saus"
                           >
                             {digit}
                           </span>
                         ))}
                       <span className="font-bold">,-</span>
                     </div>
-                    <p className="text-xs">
+                    <p className="text-xs 2xl:text-sm">
                       <span className="inline-block group-open:rotate-90">
                         ▸
                       </span>{" "}

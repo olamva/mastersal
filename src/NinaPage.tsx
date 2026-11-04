@@ -24,7 +24,7 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
     <>
       <Sparkles />
       <main
-        className={`relative mx-auto max-w-5xl px-4 pt-10 pb-16 text-plum ${rotting ? "rotting" : ""}`}
+        className={`relative mx-auto max-w-5xl px-4 pt-10 pb-16 text-plum 2xl:flex 2xl:min-h-dvh 2xl:max-w-none 2xl:flex-col 2xl:justify-evenly 2xl:px-10 2xl:pb-10 ${rotting ? "rotting" : ""}`}
       >
         <header className="enter text-center">
           <p className="font-wide text-xs tracking-[0.4em] sm:text-sm">
@@ -56,7 +56,7 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
           </div>
         </header>
         {snapshot?.members.length ? (
-          <ul className="mt-14 grid items-start gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-14 grid items-start gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:mt-0 2xl:grid-cols-6 2xl:gap-6">
             {snapshot.members.map((member, index) => (
               <li
                 key={member.id}
@@ -133,7 +133,7 @@ export const NinaPage = ({ snapshot, rotting }: NinaPageProps) => {
           )
         )}
         {snapshot !== undefined && (
-          <p className="mt-16 text-center font-script text-2xl">
+          <p className="mt-16 text-center font-script text-2xl 2xl:mt-0">
             Hi Barbie! Hi Ken! Hi {group}!
             <a href="/first" className="mt-2 block text-lg underline">
               🏆 Først på salen
