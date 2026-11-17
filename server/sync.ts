@@ -1,62 +1,69 @@
-import { decrypt, encrypt, type EncryptedValue } from "./crypto.js";
+import { decrypt, encrypt } from "./crypto.js";
 import { withClient } from "./db.js";
-import { toMembers, type Group } from "./members.js";
+import { env } from "./env.js";
+import { toMembers, type Group, type Snapshot } from "./members.js";
 import { requestTokens } from "./online.js";
 
 const groupId = "487db212-6c4f-4f7b-a616-563d5ee419cb";
 
+async function redis(...command: (string | number)[]) {
+  const response = await fetch(env("KV_REST_API_URL"), {
+    method: "POST",
+    headers: { authorization: `Bearer ${env("KV_REST_API_TOKEN")}` },
+    body: JSON.stringify(command),
+  });
+  const { result, error } = (await response.json()) as {
+    result?: string | null;
+    error?: string;
+  };
+  if (error) throw new Error(error);
+  return result ?? null;
+}
+
 export async function saveRefreshToken(token: string) {
-  const { ciphertext, nonce, tag } = encrypt(token);
-  await withClient((client) =>
-    client.query(
-      `INSERT INTO oauth_connection (singleton, refresh_token_ciphertext, refresh_token_nonce, refresh_token_tag) VALUES (true, $1, $2, $3)
-     ON CONFLICT (singleton) DO UPDATE SET refresh_token_ciphertext = $1, refresh_token_nonce = $2, refresh_token_tag = $3, authorization_required = false, authorized_at = now(), updated_at = now()`,
-      [ciphertext, nonce, tag],
-    ),
-  );
+  await redis("SET", "online:refresh", encrypt(token));
 }
 
 async function accessToken() {
-  return withClient(async (client) => {
-    await client.query("BEGIN");
-    const {
-      rows: [stored],
-    } = await client.query<EncryptedValue>(
-      "SELECT refresh_token_ciphertext AS ciphertext, refresh_token_nonce AS nonce, refresh_token_tag AS tag FROM oauth_connection WHERE authorization_required = false FOR UPDATE",
-    );
-    if (!stored) throw new Error("Online authorization is required");
-    try {
-      const tokens = await requestTokens({
-        grant_type: "refresh_token",
-        refresh_token: decrypt(stored),
-      });
-      if (tokens.refresh_token) {
-        const { ciphertext, nonce, tag } = encrypt(tokens.refresh_token);
-        await client.query(
-          "UPDATE oauth_connection SET refresh_token_ciphertext = $1, refresh_token_nonce = $2, refresh_token_tag = $3, updated_at = now()",
-          [ciphertext, nonce, tag],
-        );
-      }
-      return tokens.access_token;
-    } catch (error) {
-      if (error instanceof Error && error.message === "invalid_grant")
-        await client.query(
-          "UPDATE oauth_connection SET authorization_required = true, updated_at = now()",
-        );
-      throw error;
-    } finally {
-      await client.query("COMMIT");
-    }
+  const cached = await redis("GET", "online:access");
+  if (cached) return decrypt(cached);
+  const stored = await redis("GET", "online:refresh");
+  if (!stored) throw new Error("Online authorization is required");
+  const tokens = await requestTokens({
+    grant_type: "refresh_token",
+    refresh_token: decrypt(stored),
+  }).catch(async (error) => {
+    if (error instanceof Error && error.message === "invalid_grant")
+      await redis("DEL", "online:refresh");
+    throw error;
   });
+  if (tokens.refresh_token) await saveRefreshToken(tokens.refresh_token);
+  await redis(
+    "SET",
+    "online:access",
+    encrypt(tokens.access_token),
+    "EX",
+    tokens.expires_in - 60,
+  );
+  return tokens.access_token;
 }
 
-export async function synchronize() {
+async function fetchGroup() {
   const response = await fetch(`https://api.vinstraff.no/groups/${groupId}`, {
     headers: { authorization: `Bearer ${await accessToken()}` },
   });
   if (!response.ok)
     throw new Error(`Vinstraff request failed with HTTP ${response.status}`);
-  const group = (await response.json()) as Group;
+  return (await response.json()) as Group;
+}
+
+export async function liveSnapshot(): Promise<Snapshot> {
+  const group = await fetchGroup();
+  return { groupName: group.name, members: toMembers(group) };
+}
+
+export async function synchronize() {
+  const group = await fetchGroup();
   await withClient((client) =>
     client.query(
       `INSERT INTO public_snapshot (singleton, group_name, group_short_name, members, synchronized_at) VALUES (true, $1, $2, $3, now())

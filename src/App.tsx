@@ -15,7 +15,7 @@ export default function App() {
         .then((response) => response.json())
         .then(setSnapshot, () => setSnapshot((current) => current ?? null));
     load();
-    const interval = setInterval(() => document.hidden || load(), 60_000);
+    const interval = setInterval(() => document.hidden || load(), 30_000);
     return () => clearInterval(interval);
   }, []);
 
