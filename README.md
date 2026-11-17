@@ -20,7 +20,7 @@ Register the Online client by hand, because Online rejects dynamic registration.
 
 ## Synchronization
 
-`/api/snapshot` synchronizes on each visit. It returns the stored snapshot when the synchronization fails. The Vercel cron calls `/api/cron` each day.
+`/api/snapshot` synchronizes on each request. The Vercel CDN caches the response for 30 minutes, so Neon compute can suspend between requests. It returns the stored snapshot when the synchronization fails. The Vercel cron calls `/api/cron` each day.
 
 An `invalid_grant` response stops synchronization. To connect Online again, open `/api/connect`, enter `ADMIN_SETUP_SECRET` as the password, and complete the authorization.
 
