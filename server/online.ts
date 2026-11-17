@@ -46,8 +46,13 @@ export async function requestTokens(parameters: Record<string, string>) {
     error?: string;
     access_token?: string;
     refresh_token?: string;
+    expires_in?: number;
   };
-  if (!response.ok || !payload.access_token)
+  if (!response.ok || !payload.access_token || !payload.expires_in)
     throw new Error(payload.error ?? "token_request_failed");
-  return payload as { access_token: string; refresh_token?: string };
+  return payload as {
+    access_token: string;
+    refresh_token?: string;
+    expires_in: number;
+  };
 }

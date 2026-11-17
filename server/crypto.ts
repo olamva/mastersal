@@ -6,25 +6,30 @@ import {
 } from "node:crypto";
 import { env } from "./env.js";
 
-export type EncryptedValue = { ciphertext: Buffer; nonce: Buffer; tag: Buffer };
-
 const key = () => Buffer.from(env("TOKEN_ENCRYPTION_KEY"), "base64");
 
-export function encrypt(value: string): EncryptedValue {
+export function encrypt(value: string) {
   const nonce = randomBytes(12);
   const cipher = createCipheriv("aes-256-gcm", key(), nonce);
   const ciphertext = Buffer.concat([
     cipher.update(value, "utf8"),
     cipher.final(),
   ]);
-  return { ciphertext, nonce, tag: cipher.getAuthTag() };
+  return Buffer.concat([nonce, cipher.getAuthTag(), ciphertext]).toString(
+    "base64",
+  );
 }
 
-export function decrypt({ ciphertext, nonce, tag }: EncryptedValue) {
-  const decipher = createDecipheriv("aes-256-gcm", key(), nonce);
-  decipher.setAuthTag(tag);
+export function decrypt(value: string) {
+  const sealed = Buffer.from(value, "base64");
+  const decipher = createDecipheriv(
+    "aes-256-gcm",
+    key(),
+    sealed.subarray(0, 12),
+  );
+  decipher.setAuthTag(sealed.subarray(12, 28));
   return Buffer.concat([
-    decipher.update(ciphertext),
+    decipher.update(sealed.subarray(28)),
     decipher.final(),
   ]).toString("utf8");
 }

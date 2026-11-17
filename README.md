@@ -2,7 +2,7 @@
 
 This site shows the unpaid Vinstraff totals for the `mastersal` group.
 
-A React and Vite app renders the page. Vercel functions in `api/` hold the server logic. Neon PostgreSQL stores the encrypted refresh token and the snapshot. Online provides OIDC authorization.
+A React and Vite app renders the page. Vercel functions in `api/` hold the server logic. Upstash Redis stores the encrypted Online tokens. Neon PostgreSQL stores the fallback snapshot and the "first" totals. Online provides OIDC authorization.
 
 ## Commands
 
@@ -13,16 +13,20 @@ A React and Vite app renders the page. Vercel functions in `api/` hold the serve
 ## Configuration
 
 Copy `.env.example` to `.env.local` in each worktree that needs it, and replace each placeholder. `pnpm dev` does not need it.
-Set the same variables for Production in Vercel. Generate `TOKEN_ENCRYPTION_KEY` as 32 random bytes in Base64 format.
+Set the same variables for Production in Vercel. The Upstash Redis integration in Vercel sets `KV_REST_API_URL` and `KV_REST_API_TOKEN`. Generate `TOKEN_ENCRYPTION_KEY` as 32 random bytes in Base64 format.
 Apply each file in `migrations/` to the Neon database once.
 
 Register the Online client by hand, because Online rejects dynamic registration. Use the callback URL `https://<production-domain>/api/auth/callback`.
 
 ## Synchronization
 
-`/api/snapshot` synchronizes on each request. The Vercel CDN caches the response for 30 minutes, so Neon compute can suspend between requests. It returns the stored snapshot when the synchronization fails. The Vercel cron calls `/api/cron` each day.
+`/api/snapshot` gets the group from Vinstraff on each request and does not use Neon. The Vercel CDN caches the response for 30 seconds, and the page requests it each 30 seconds. Thus the totals are at most 1 minute old. When the Vinstraff request fails, the endpoint returns the Neon snapshot, and the CDN caches it for 30 minutes. Thus Neon compute can suspend during an outage.
 
-An `invalid_grant` response stops synchronization. To connect Online again, open `/api/connect`, enter `ADMIN_SETUP_SECRET` as the password, and complete the authorization.
+Online access tokens are valid for 10 minutes. Redis keeps the access token until 1 minute before it expires. Online rotates the refresh token at each refresh, so Redis stores each new refresh token.
+
+The Vercel cron calls `/api/cron` each day to write the Neon snapshot.
+
+An `invalid_grant` response deletes the refresh token and stops synchronization. To connect Online again, open `/api/connect`, enter `ADMIN_SETUP_SECRET` as the password, and complete the authorization.
 
 ## First place totals
 

@@ -1,17 +1,18 @@
 import { withClient } from "../server/db.js";
-import { synchronize } from "../server/sync.js";
+import { liveSnapshot } from "../server/sync.js";
 
 export async function GET() {
-  await synchronize().catch(() => undefined);
+  const live = await liveSnapshot().catch(() => null);
   return Response.json(
-    await withClient(
-      async (client) =>
-        (
-          await client.query(
-            `SELECT group_name AS "groupName", members FROM public_snapshot`,
-          )
-        ).rows[0] ?? null,
-    ),
-    { headers: { "cache-control": "public, s-maxage=1800" } },
+    live ??
+      (await withClient(
+        async (client) =>
+          (
+            await client.query(
+              `SELECT group_name AS "groupName", members FROM public_snapshot`,
+            )
+          ).rows[0] ?? null,
+      )),
+    { headers: { "cache-control": `public, s-maxage=${live ? 30 : 1800}` } },
   );
 }
