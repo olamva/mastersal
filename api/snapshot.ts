@@ -12,5 +12,6 @@ export async function GET() {
           )
         ).rows[0] ?? null,
     ),
+    { headers: { "cache-control": "public, s-maxage=1800" } },
   );
 }
