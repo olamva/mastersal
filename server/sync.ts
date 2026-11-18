@@ -24,28 +24,10 @@ export async function saveRefreshToken(token: string) {
   await redis("SET", "online:refresh", encrypt(token));
 }
 
-async function neonRefreshToken() {
-  const stored = await withClient(
-    async (client) =>
-      (
-        await client.query<{ ciphertext: Buffer; nonce: Buffer; tag: Buffer }>(
-          "SELECT refresh_token_ciphertext AS ciphertext, refresh_token_nonce AS nonce, refresh_token_tag AS tag FROM oauth_connection WHERE authorization_required = false",
-        )
-      ).rows[0],
-  );
-  return (
-    stored &&
-    Buffer.concat([stored.nonce, stored.tag, stored.ciphertext]).toString(
-      "base64",
-    )
-  );
-}
-
 async function accessToken() {
   const cached = await redis("GET", "online:access");
   if (cached) return decrypt(cached);
-  const stored =
-    (await redis("GET", "online:refresh")) ?? (await neonRefreshToken());
+  const stored = await redis("GET", "online:refresh");
   if (!stored) throw new Error("Online authorization is required");
   const tokens = await requestTokens({
     grant_type: "refresh_token",
